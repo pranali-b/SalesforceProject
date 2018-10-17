@@ -1,4 +1,4 @@
-package testScript;
+package reusableMethods;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -24,8 +24,13 @@ public class Automationnew extends ReusableMethodsnew {
 	//t1
 	public static void loginErrorMessage() throws IOException {
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceProject/src/test/resources/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/Configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+	
 	
 		logger = extent.createTest("loginErrorMessage");
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
@@ -42,7 +47,7 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
@@ -65,8 +70,12 @@ public class Automationnew extends ReusableMethodsnew {
 	//t2
 	public static void loginFreetrial() throws IOException {
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/Configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
 	
 		logger = extent.createTest("loginFreetrial");
 	
@@ -74,25 +83,25 @@ public class Automationnew extends ReusableMethodsnew {
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+		
 		
 		logger.log(Status.PASS, MarkupHelper.createLabel("SFDC login page is launched..", ExtentColor.GREEN));
 		//System.out.println("Pass: SFDC login page is launched..");
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
 
 
-		// String oldWindow=  driver.getWindowHandle();
+		 String oldWindow=  driver.getWindowHandle();
 		Set<String> getAllWindows=driver.getWindowHandles();
 		String [] getWindow=getAllWindows.toArray(new String[getAllWindows.size()]);
 
@@ -113,14 +122,17 @@ public class Automationnew extends ReusableMethodsnew {
 	//t3
 	public static void RememberMe() throws InterruptedException, IOException {
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
 	
 		logger = extent.createTest("RememberMe");
 
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
 		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
@@ -131,12 +143,10 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
-
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*rememberme */
 		WebElement rememberme =driver.findElement(By.id("rememberUn"));
 		clickObj(rememberme, "rememberme Button");
@@ -168,15 +178,19 @@ public class Automationnew extends ReusableMethodsnew {
 	//t4a
 	public static void forGotPassword() throws IOException {
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
 	
 		logger = extent.createTest("forGotPassword");
 	
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+		
 		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
@@ -191,7 +205,7 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='un']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*continue button*/
 		WebElement continuebutton =driver.findElement(By.xpath("//input[@id='continue']"));
@@ -209,15 +223,18 @@ public class Automationnew extends ReusableMethodsnew {
 	//t4b
 	public static void ValidateLoginErrorMessage() throws IOException {
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
 	
 		logger = extent.createTest("ValidateLoginErrorMessage");
 		
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
 		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
@@ -275,8 +292,12 @@ public class Automationnew extends ReusableMethodsnew {
 		FirefoxDriver driver = new FirefoxDriver(dc);
 		
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
 
 		logger = extent.createTest("userMenu");
 
@@ -284,7 +305,6 @@ public class Automationnew extends ReusableMethodsnew {
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
 		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
@@ -294,18 +314,17 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
 
-		//driver.get("https://na49.salesforce.com/home/home.jsp?source=lex");
-		//System.out.println(driver.getCurrentUrl());
+		driver.get("https://na49.salesforce.com/home/home.jsp?source=lex");
+		System.out.println(driver.getCurrentUrl());
 
 
 		/*usermenu link */
@@ -325,15 +344,19 @@ public class Automationnew extends ReusableMethodsnew {
 	//t7
 	public static void mySetting() throws InterruptedException, IOException {
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
 
 		logger = extent.createTest("mySetting");
 
 		
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+		
 		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
@@ -343,18 +366,17 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
 
-		//driver.get("https://na49.salesforce.com/home/home.jsp?source=lex");
-		//System.out.println(driver.getCurrentUrl());
+		driver.get("https://na49.salesforce.com/home/home.jsp?source=lex");
+		System.out.println(driver.getCurrentUrl());
 
 
 		/*usermenu link */
@@ -412,7 +434,7 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un1 = driver.findElement(By.xpath("//input[@id='sender_email']"));
-		enterText(un1, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un1, credpro.getProperty("loginusername"), "userName");
 
 		WebElement automaticbcc =driver.findElement(By.xpath("//input[@id='auto_bcc1']")); 
 		clickObj(automaticbcc, "automaticbcc Button");
@@ -439,13 +461,16 @@ public class Automationnew extends ReusableMethodsnew {
 	//t8
 	public static void developerConsole() throws InterruptedException, IOException{
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
 
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+		
 		logger = extent.createTest("developerConsole");
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
 		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
@@ -455,12 +480,11 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
@@ -499,14 +523,18 @@ public class Automationnew extends ReusableMethodsnew {
 	//t9
 	public static void logoutSalesforce() throws InterruptedException, IOException{
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
 
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+		
 		logger = extent.createTest("logoutSalesforce");
 		
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+		
 		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
@@ -516,12 +544,11 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
@@ -551,14 +578,18 @@ public class Automationnew extends ReusableMethodsnew {
 	//t10
 	public static void createAccount() throws InterruptedException, IOException{
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+		
 		logger = extent.createTest("createAccount");
 		
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
-		
+				
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
 		
@@ -567,12 +598,11 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
@@ -612,13 +642,18 @@ public class Automationnew extends ReusableMethodsnew {
 	//t11
 	public static void createaccountnewView() throws InterruptedException, IOException{
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+		
 		logger = extent.createTest("createaccountnewView");
 		
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
 		
@@ -627,12 +662,11 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
@@ -664,13 +698,18 @@ public class Automationnew extends ReusableMethodsnew {
 	//t12
 	public static void EditView() throws InterruptedException, IOException{
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+		
 		logger = extent.createTest("EditView");
 		
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
 		
@@ -679,12 +718,11 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
@@ -756,13 +794,18 @@ public class Automationnew extends ReusableMethodsnew {
 	//t13
 	public static void MergeAccounts() throws InterruptedException, IOException{
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+		
 		logger = extent.createTest("MergeAccounts");
 		
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
 				logger.log(Status.PASS, MarkupHelper.createLabel("SFDC login page is launched..", ExtentColor.GREEN));
@@ -770,12 +813,11 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
@@ -838,13 +880,18 @@ public class Automationnew extends ReusableMethodsnew {
 	//t14
 	public static void activeWithLastActivity() throws InterruptedException, IOException{
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+		
 		logger = extent.createTest("activeWithLastActivity");
 		
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
 		
@@ -854,12 +901,11 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
@@ -936,13 +982,18 @@ public class Automationnew extends ReusableMethodsnew {
 	//t15
 	public static void opportunityMenu() throws InterruptedException, IOException{
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+		
 		logger = extent.createTest("opportunityMenu");
 		
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
 		
@@ -952,12 +1003,11 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
@@ -986,14 +1036,19 @@ public class Automationnew extends ReusableMethodsnew {
 	//t16
 	public static void selectUserMenu() throws InterruptedException, IOException{
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+		
 		logger = extent.createTest("selectUserMenu");
 		
 		
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
 		
@@ -1003,12 +1058,11 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
@@ -1088,14 +1142,19 @@ public class Automationnew extends ReusableMethodsnew {
 	//t17
 	public static void pipelineReport() throws InterruptedException, IOException{
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+		
 		logger = extent.createTest("pipelineReport");
 	
 	
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+	
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
 		
@@ -1106,12 +1165,11 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
@@ -1142,13 +1200,18 @@ public class Automationnew extends ReusableMethodsnew {
 	//t18
 	public static void stuckOpportunitiesReport() throws InterruptedException, IOException{
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+		
 		logger = extent.createTest("stuckOpportunitiesReport");
 		
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
 		
@@ -1158,12 +1221,11 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
@@ -1192,13 +1254,17 @@ public class Automationnew extends ReusableMethodsnew {
 	//t19
 	public static void quarterlySummaryReport() throws InterruptedException, IOException{
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+		
 		logger = extent.createTest("quarterlySummaryReport");
 	
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
 		
@@ -1208,12 +1274,11 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
@@ -1260,12 +1325,17 @@ public class Automationnew extends ReusableMethodsnew {
 	//t20
 	public static void leadsTabLink() throws InterruptedException, IOException{
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+		
 		logger = extent.createTest("leadsTabLink");
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
 		
@@ -1275,12 +1345,11 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
@@ -1315,13 +1384,18 @@ public class Automationnew extends ReusableMethodsnew {
 	//t21
 	public static void validateViewDropdown() throws InterruptedException, IOException{
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+		
 		logger = extent.createTest("validateViewDropdown");
 		
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
 		
@@ -1331,12 +1405,11 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
@@ -1375,13 +1448,18 @@ public class Automationnew extends ReusableMethodsnew {
 	//t22
 	public static void functionalityGoButton() throws InterruptedException, IOException{
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+		
 		logger = extent.createTest("functionalityGoButton");
 	
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
 		
@@ -1391,12 +1469,11 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
@@ -1431,11 +1508,12 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un1 = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un1, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un1, credpro.getProperty("loginusername"), "userName");
+
 
 		/*Enter password to password field*/
 		WebElement pwd1 = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd1, "pranali123", "Password");
+		enterText(pwd1, credpro.getProperty("loginpassword"), "Password");
 
 		/*Click login*/
 		WebElement login1 = driver.findElement(By.xpath("//input[@id='Login']")) ;
@@ -1466,13 +1544,18 @@ public class Automationnew extends ReusableMethodsnew {
 	//t23
 	public static void todaysLeadsWork() throws InterruptedException, IOException{
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+		
 		logger = extent.createTest("todaysLeadsWork");
 		
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+		
 		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
@@ -1484,12 +1567,11 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
@@ -1527,13 +1609,17 @@ public class Automationnew extends ReusableMethodsnew {
 	//t24
 	public static void newButtonLeadsHome() throws InterruptedException, IOException{
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+		
 		logger = extent.createTest("newButtonLeadsHome");
 		
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
 		
@@ -1544,12 +1630,11 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");
@@ -1605,13 +1690,18 @@ public class Automationnew extends ReusableMethodsnew {
 	//t25
 	public static void createNewContact() throws InterruptedException, IOException{
 		Properties pro=new Properties();
-		BufferedReader reader = new BufferedReader(new FileReader("./src/datafiles/Configuration.properties"));
+		BufferedReader reader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/configuration.properties"));
 		pro.load(reader);
+		
+		Properties credpro=new Properties();
+		BufferedReader credreader = new BufferedReader(new FileReader("/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/datafiles/usercredentials.properties"));
+		credpro.load(credreader);
+		
 		logger = extent.createTest("createNewContact");
 		
 		IntializeDriver("firefox", pro.getProperty("firefoxpath"));
 		driver.get(pro.getProperty("salesforceUrl"));
-		driver.get(pro.getProperty("implicitwait"));
+		
 		logger.log(Status.PASS, MarkupHelper.createLabel("Firefox driver is launched", ExtentColor.GREEN));
 		//System.out.println("Pass: Firefox driver is launched");
 		
@@ -1621,12 +1711,11 @@ public class Automationnew extends ReusableMethodsnew {
 
 		/*Enter username to username field*/
 		WebElement un = driver.findElement(By.xpath("//input[@id='username']"));
-		enterText(un, "pranali.lonkar030@gmail.com", "userName");
+		enterText(un, credpro.getProperty("loginusername"), "userName");
 
 		/*Enter password to password field*/
 		WebElement pwd = driver.findElement(By.xpath("//input[@id='password']"));
-		enterText(pwd, "pranali123", "Password");
-
+		enterText(pwd, credpro.getProperty("loginpassword"), "Password");
 		/*Click login*/
 		WebElement login = driver.findElement(By.xpath("//input[@id='Login']")) ;
 		clickObj(login, "Login Button");

@@ -1,4 +1,4 @@
-package testScript;
+package reusableMethods;
 
 import java.io.IOException;
 
@@ -12,7 +12,7 @@ public class DriverScriptTest extends Automationnew{
 	@Test
 	public static void mainMethod() throws Exception{
 
-		String dt_Path = "/Users/pranalibankar/eclipse-workspace/SalesforceProject/src/test/resources/Utility/Book1.xls";
+		String dt_Path = "/Users/pranalibankar/eclipse-workspace/SalesforceAutomation/src/test/resources/Utility/Book1.xls";
 
 
 		String[][] recdata = ReusableMethodsnew.readSheet(dt_Path, "Sheet1");
